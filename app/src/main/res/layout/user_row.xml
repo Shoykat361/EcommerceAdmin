@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="user"
+            type="com.example.ecommerceadmin.models.UserofEcom" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/userRowIV"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                app:setImageUrl="@{user.image}"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userRowName"
+                tools:text="User Name"
+                android:layout_toEndOf="@id/userRowIV"
+                android:layout_marginStart="5dp"
+                android:text="@{user.userName ?? `Not available`}"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userRowEmail"
+                tools:text="user@gmail.com"
+                android:layout_toEndOf="@id/userRowIV"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/black"
+                android:layout_below="@id/userRowName"
+                android:text="@{user.emailAddress}"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userRowLastSeen"
+                tools:text="Last seen on "
+                android:visibility="@{user.online ? View.GONE : View.VISIBLE}"
+                android:layout_toEndOf="@id/userRowIV"
+                android:layout_marginStart="5dp"
+                android:layout_below="@id/userRowEmail"
+                android:textStyle="italic"
+                app:setDateWithText="@{user.lastUsageTimestamp}" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userRowAvailable"
+                tools:text="Online"
+                android:visibility="@{user.online ? View.VISIBLE : View.GONE}"
+                android:textColor="@color/purple_500"
+                android:layout_toEndOf="@id/userRowIV"
+                android:layout_marginStart="5dp"
+                android:layout_below="@id/userRowEmail"
+                android:textStyle="italic"
+                android:text="Online"/>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
